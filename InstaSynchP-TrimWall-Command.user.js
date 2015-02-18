@@ -5,7 +5,7 @@
 
 // @version     1
 // @author      Zod-
-// @source      https://github.com/Zod-/InstaSynchP-TrimWall
+// @source      https://github.com/Zod-/InstaSynchP-TrimWall-Command
 // @license     MIT
 
 // @include     *://instasync.com/r/*
@@ -25,12 +25,10 @@ function TrimWall(version) {
     'id': 'trimwall-length',
     'type': 'int',
     'min': 0,
-    'max': 100000,
     'default': 60,
     'size': 8,
     'section': ['Playlist', 'Trimwall']
   }];
-  this.counter = {};
   this.commands = {
     "'trimwall": {
       'hasArguments': true,
@@ -40,11 +38,6 @@ function TrimWall(version) {
     }
   };
 }
-
-TrimWall.prototype.resetVariables = function () {
-  "use strict";
-  this.counter = {};
-};
 
 TrimWall.prototype.execute = function (opts) {
   "use strict";
@@ -71,7 +64,7 @@ TrimWall.prototype.execute = function (opts) {
       map[key].time += video.duration;
     });
 
-    function compareVideos(v1, v2) {
+    function cmpVidDur(v1, v2) {
       return v2.duration - v1.duration;
     }
 
@@ -80,7 +73,7 @@ TrimWall.prototype.execute = function (opts) {
         continue;
       }
       //sort videos by length
-      map[username].videos.sort(compareVideos);
+      map[username].videos.sort(cmpVidDur);
       //remove till the video limit is hit
       for(var i = 0; i < map[username].videos.length && map[username].time > maxTimeLimit; i++){
         map[username].time -= map[username].videos[i].duration;
