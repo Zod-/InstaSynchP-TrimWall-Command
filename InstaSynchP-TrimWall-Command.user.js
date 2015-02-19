@@ -33,7 +33,7 @@ function TrimWall(version) {
     "'trimwall": {
       'hasArguments': true,
       'reference': this,
-      'description': 'Trim a users wall down to the specified time',
+      'description': 'Trim the wall of all or the specified users to a time limit.',
       'callback': this.execute
     }
   };
@@ -45,6 +45,13 @@ TrimWall.prototype.execute = function (opts) {
     map = {},
     maxTimeLimit = opts.numbers[0] || gmc.get('trimwall-length');
     maxTimeLimit *= 60;
+
+    //add all users when no user specified
+    if(opts.usernames.length === 0){
+      window.room.userlist.users.forEach(function(user){
+        opts.usernames.push(user.username);
+      });
+    }
 
     //initialize the map
     opts.usernames.forEach(function (user){

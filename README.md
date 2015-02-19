@@ -6,7 +6,7 @@ Settings
 
 Name
 -----
-`'trimwall` - Trim a users wall down to the specified time
+`'trimwall` - Trim the wall of all or the specified users to a time limit.
 
 Synopsis
 --------
@@ -19,6 +19,8 @@ Description
 
 Examples
 -----------
+`'trimwall` Trim the wall of all users to the default value<br>
+`'trimwall 25` Trim the wall of all users to 25 minutes<br>
 `'trimwall user1` Trim the wall of user1 to the default value<br>
 `'trimwall user1 25` Trim the wall of user1 to 25 minutes<br>
 `'trimwall user1 user2 25` Trim the wall of user1 and user2 to 25 minutes<br>
